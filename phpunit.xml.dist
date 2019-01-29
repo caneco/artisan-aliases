@@ -3,7 +3,6 @@
          backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"
-         verbose="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
@@ -11,13 +10,19 @@
          stopOnFailure="false"
          printerClass="Sempro\PHPUnitPrettyPrinter\PrettyPrinter">
     <testsuites>
-        <testsuite name="ArtisanAliases Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Feature">
+            <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
+        <testsuite name="Functional">
+            <directory suffix="Test.php">./tests/Functional</directory>
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+    </php>
 </phpunit>

@@ -7,15 +7,12 @@ use Caneco\ArtisanAliases\AliasManager;
 
 class Alias
 {
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.1.0';
 
-    public static function store(string $name, string $line, bool $global)
+    public static function store(string $name, string $line, ?bool $global = false, ?bool $force = false)
     {
-        $manager = new AliasManager(
-            $global ? AliasFile::global() : AliasFile::local()
-        );
 
-        return $manager->save(new AliasModel($name, $line));
+        return self::manager($global)->save(new AliasModel($name, $line), $force);
     }
 
     public static function load(?string $location = null): array
@@ -42,5 +39,12 @@ class Alias
         return (new AliasManager(
             AliasFile::global()
         ))->load();
+    }
+
+    public static function manager(bool $global): AliasManager
+    {
+        return new AliasManager(
+            $global ? AliasFile::global() : AliasFile::local()
+        );
     }
 }

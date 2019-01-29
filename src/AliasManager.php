@@ -2,11 +2,14 @@
 
 namespace Caneco\ArtisanAliases;
 
+use Caneco\ArtisanAliases\Alias;
 use Caneco\ArtisanAliases\AliasDirectory;
 use Caneco\ArtisanAliases\AliasModel;
 use Caneco\ArtisanAliases\Exceptions\AliasException;
+use Caneco\ArtisanAliases\Helpers\Art;
 use Illuminate\Support\Facades\Artisan;
 use sixlive\DotenvEditor\DotenvEditor;
+use sixlive\DotenvEditor\EnvFile;
 
 class AliasManager
 {
@@ -50,13 +53,13 @@ class AliasManager
         }
     }
 
-    public function save(AliasModel $command)
+    public function save(AliasModel $command, ?bool $force = false)
     {
         if (! file_exists($this->filePath)) {
             throw new AliasException("Expected file '{$this->filePath}' does not exists!");
         }
 
-        if (array_key_exists($command->getName(), Artisan::all())) {
+        if (array_key_exists($command->getName(), Artisan::all()) && !$force) {
             throw new AliasException("Artisan command/alias already exists!");
         }
 
@@ -67,12 +70,12 @@ class AliasManager
         return $file->save();
     }
 
-    public function looksValid(string $string): bool
+    private function looksValid(string $string): bool
     {
         return strpos($string, '=') !== false;
     }
 
-    public function isNotComment(string $string): bool
+    private function isNotComment(string $string): bool
     {
         return isset($string[0]) && $string[0] !== '#';
     }

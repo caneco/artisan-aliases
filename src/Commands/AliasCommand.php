@@ -13,29 +13,25 @@ class AliasCommand extends Command
                             {name? : The name of the alias}
                             {line? : The command line to be aliased}
                             {--list : list all alias defined}
-                            {--g|global : Add alias globally [`~/.laravel_alias`]}
-                            {--force : Force alias to be replaced}';
+                            {--force : Force alias to be replaced}
+                            {--g|global : Add alias globally [`~/.laravel_alias`]}';
 
     protected $description = 'Create an alias of another command.';
 
     public function handle()
     {
-        if (empty($this->argument('name'))
-            or empty($this->argument('line'))
-            or $this->option('list')
-        ) {
-            $this->handleList();
-            exit;
+        if (empty($this->argument('name')) or $this->option('list')) {
+            return $this->listAliases();
         }
 
-        Alias::store(
-            trim($this->argument('name')),
-            trim($this->argument('line')),
-            $this->option('global')
-        );
+        if (! empty($this->argument('line'))) {
+            return $this->storeAlias();
+        }
+
+        return $this->listAliases();
     }
 
-    private function handleList()
+    private function listAliases()
     {
         $list = Alias::load();
 
@@ -59,4 +55,19 @@ class AliasCommand extends Command
             $this->getOutput()->block('All aliases are currently disabled, to enable set `enabled = true` in your config file to use them.', 'Notice', 'fg=black;bg=yellow', '! ', true);
         }
     }
+
+    private function storeAlias()
+    {
+        Alias::store(
+            trim($this->argument('name')),
+            trim($this->argument('line')),
+            $this->option('global'),
+            $this->option('force')
+        );
+    }
+
+    // private function deleteAlias()
+    // {
+    //     // SOON
+    // }
 }
