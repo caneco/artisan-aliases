@@ -1,6 +1,7 @@
-<p align="center"><img src="https://raw.githubusercontent.com/caneco/artisan-aliases/master/art/logo.png" width="400"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/caneco/artisan-aliases/master/art/logo.png" width="400"/>
+</p><br>
 
-<p align="center"><img src="https://raw.githubusercontent.com/caneco/artisan-aliases/master/art/preview.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/caneco/artisan-aliases/master/art/preview.png" width="560"/></p>
 
 <p align="center">
 <a href="https://packagist.org/packages/caneco/artisan-aliases"><img src="https://poser.pugx.org/caneco/artisan-aliases/d/total.svg" alt="Total Downloads"></a>
@@ -100,7 +101,7 @@ To list the current alias available you can run the following command:
 
 ```
 >_ php artisan alias --list
-Laravel `Artisan Aliases` 1.0.0
+Laravel `Artisan Aliases` 1.1.0
 
 Usage:
  alias [-g|--global] [--] [<as>]
@@ -206,16 +207,16 @@ Laravel Framework | Artisan Alias
 
 ## Road map
 
-Artisan Alias was released so you can use it normally, but there's still some things that I would like to see in the package.
+Artisan Alias is stable but there is still some things that I would like to add in the package.
 
 Here's the plan for what's coming:
 
 - [ ] Remove an existing alias using the option `--d|delete`
-- [ ] Allow to replace an existing alias using the option `--force`
-- [ ] Firing a `@handle` method if 
+- [ ] Firing a `@handle` method if alias has a `::class` reference
 - [ ] Alert the user try to add an alias with `sudo` in the command **(usefull?)**
 - [ ] Add comments
-- [ ] Add tests
+- [x] Allow to replace an existing alias using the option `--force`
+- [x] Add tests
 
 
 

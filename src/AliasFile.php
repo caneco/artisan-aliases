@@ -2,8 +2,6 @@
 
 namespace Caneco\ArtisanAliases;
 
-use Illuminate\Support\Facades\Config;
-
 class AliasFile
 {
     public static function local(): string

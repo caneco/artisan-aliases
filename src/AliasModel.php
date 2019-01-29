@@ -2,6 +2,8 @@
 
 namespace Caneco\ArtisanAliases;
 
+use Caneco\ArtisanAliases\Exceptions\AliasException;
+
 class AliasModel
 {
     private $name;

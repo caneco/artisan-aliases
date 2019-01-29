@@ -31,7 +31,7 @@ class ArtisanAliasesServiceProvider extends ServiceProvider
         ], 'config');
 
         $this->publishes([
-            __DIR__.'/../stubs/.laravel_aliases' => base_path('.laravel_aliases'),
+            __DIR__.'/../stubs/laravel_aliases' => base_path('.laravel_aliases'),
         ], 'aliases');
     }
 
